@@ -1,0 +1,48 @@
+.page-slide {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  [class *= "__container"] {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+.pagination {
+  position: fixed;
+  z-index: 100;
+  top: clamp(15px, 0.568rem + 1.48vw, 28px);
+  right: clamp(20px, 0.767rem + 1.93vw, 37px);
+  display: flex;
+  gap: 6px;
+
+  span {
+    border: 1px solid #FFFFFF;
+    width: 12px;
+    height: 12px;
+    display: block;
+    border-radius: 50%;
+  }
+
+  span.swiper-pagination-bullet-active {
+    background: #B21403;
+    border-color: transparent;
+  }
+}
+
+.tag {
+  font-size: 12px;
+  line-height: 90%;
+  background: #13385D;
+  border: 0.5px solid #FFFFFF;
+  border-radius: 100ch;
+  padding: 9px 14px;
+}
+
+.title {
+}
+
+
+@import 'main';
