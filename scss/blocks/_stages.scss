@@ -24,6 +24,9 @@
     flex: 1 0 auto;
     gap: 7px;
     text-align: left;
+    max-height: 510px;
+    margin-top: auto;
+    margin-bottom: auto;
 
     .stage:nth-child(1) {
       grid-column: 1 / 3;

@@ -1,0 +1,77 @@
+.profit-item {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 90%;
+    color: #1F5A95;
+    margin-bottom: 2em;
+  }
+
+  &__image {
+    margin-top: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    &::before {
+      position: absolute;
+      content: '';
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 14%;
+      border-radius: 10px 10px 0 0;
+      background: #1F5A95;
+    }
+
+    img {
+      position: relative;
+      height: auto;
+    }
+  }
+
+  &__colls {
+    text-align: left;
+    background: #1F5A95;
+    padding: 35px 12px 40px;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+
+    &::before {
+      content: '';
+      border-right: 2px solid white;
+      width: 0;
+      margin: 0 8px;
+      margin-bottom: -8px;
+      margin-top: 8px;
+    }
+  }
+
+  &__coll {
+
+    &:nth-child(1) {
+      order: -1;
+    }
+  }
+
+  &__coll-label {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 90%;
+    margin-bottom: 24px;
+  }
+
+  &__coll-price {
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 90%;
+    margin-bottom: 18px;
+  }
+
+  &__coll-descr {
+  }
+}
