@@ -1,0 +1,51 @@
+.stage {
+  position: relative;
+  background: #FFFFFF;
+  border: 2px solid #AEAEAE;
+  padding: 40px 16px;
+  border-radius: 10px;
+
+  &__icon {
+    position: absolute;
+    top: 12px;
+    right: 7px;
+    background: #1F5A95;
+    border-radius: 10px;
+    display: inline-flex;
+    padding: 10px;
+
+    img {
+      object-fit: contain;
+      object-position: center;
+      width: clamp(25px, 0.852rem + 2.84vw, 50px);
+      height: clamp(25px, 0.852rem + 2.84vw, 50px);
+    }
+  }
+
+  &__title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 90%;
+    color: #1F5A95;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+
+    b {
+      font-weight: 800;
+      font-size: 37px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__descr {
+  }
+
+  &__images {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+}
