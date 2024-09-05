@@ -7,6 +7,10 @@
 	&__container {
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 1090px) {
+      text-align: center;
+    }
 	}
 
 	&__title {
@@ -19,6 +23,7 @@
     grid-template-columns: 1fr 0.5fr 0.5fr 1fr 1fr;
     flex: 1 0 auto;
     gap: 7px;
+    text-align: left;
 
     .stage:nth-child(1) {
       grid-column: 1 / 3;
