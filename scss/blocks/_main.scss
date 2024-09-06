@@ -5,6 +5,136 @@
   color: #FFFFFF;
   padding: 36px 0;
 
+  &__bg {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+
+    span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      &:nth-child(1) {
+        width: 79%;
+        background: rgba($color: #1F5A95, $alpha: .35);
+        border-top-right-radius: 8% 50%;
+        border-bottom-right-radius: 8% 50%;
+      }
+      &:nth-child(2) {
+        width: 87%;
+        background: rgba($color: #8AB8E6, $alpha: .16);
+        border-top-right-radius: 9% 50%;
+        border-bottom-right-radius: 7% 50%;
+      }
+      &:nth-child(3) {
+        width: 74%;
+        background: rgba($color: #13385D, $alpha: .40);
+        border-top-right-radius: 13% 50%;
+        border-bottom-right-radius: 10% 50%;
+      }
+      &:nth-child(4) {
+        width: 62%;
+        background: rgba($color: #13385D, $alpha: .39);
+        border-top-right-radius: 19% 50%;
+        border-bottom-right-radius: 13% 50%;
+      }
+
+      @media (max-width: 670px) {
+        top: auto;
+        right: 0;
+
+        &:nth-child(1) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          width: auto;
+
+          height: 79%;
+          background: rgba($color: #1F5A95, $alpha: .35);
+          border-top-left-radius: 50% 8% ;
+          border-top-right-radius: 50% 8% ;
+        }
+        &:nth-child(2) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          width: auto;
+
+          height: 87%;
+          background: rgba($color: #8AB8E6, $alpha: .16);
+          border-top-left-radius: 50% 9% ;
+          border-top-right-radius: 50% 7% ;
+        }
+        &:nth-child(3) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          width: auto;
+
+          height: 74%;
+          background: rgba($color: #13385D, $alpha: .40);
+          border-top-left-radius: 50% 13% ;
+          border-top-right-radius: 50% 10% ;
+        }
+        &:nth-child(4) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          width: auto;
+
+          height: 62%;
+          background: rgba($color: #13385D, $alpha: .39);
+          border-top-left-radius: 50% 19% ;
+          border-top-right-radius: 50% 13% ;
+        }
+      }
+
+      // @media (max-width: 670px) {
+      //   top: auto;
+      //   right: 0;
+
+      //   &:nth-child(1) {
+      //     border-top-right-radius: 0;
+      //     border-bottom-right-radius: 0;
+      //     width: auto;
+
+      //     height: 59%;
+      //     background: rgba($color: #1F5A95, $alpha: .35);
+      //     border-top-left-radius: 50% 8% ;
+      //     border-top-right-radius: 50% 8% ;
+      //   }
+      //   &:nth-child(2) {
+      //     border-top-right-radius: 0;
+      //     border-bottom-right-radius: 0;
+      //     width: auto;
+
+      //     height: 67%;
+      //     background: rgba($color: #8AB8E6, $alpha: .16);
+      //     border-top-left-radius: 50% 9% ;
+      //     border-top-right-radius: 50% 7% ;
+      //   }
+      //   &:nth-child(3) {
+      //     border-top-right-radius: 0;
+      //     border-bottom-right-radius: 0;
+      //     width: auto;
+
+      //     height: 54%;
+      //     background: rgba($color: #13385D, $alpha: .40);
+      //     border-top-left-radius: 50% 13% ;
+      //     border-top-right-radius: 50% 10% ;
+      //   }
+      //   &:nth-child(4) {
+      //     border-top-right-radius: 0;
+      //     border-bottom-right-radius: 0;
+      //     width: auto;
+
+      //     height: 42%;
+      //     background: rgba($color: #13385D, $alpha: .39);
+      //     border-top-left-radius: 50% 19% ;
+      //     border-top-right-radius: 50% 13% ;
+      //   }
+      // }
+    }
+  }
+
 	&__container {
     position: relative;
     display: flex;
@@ -30,7 +160,7 @@
 	&__title {
     font-weight: 800;
     font-size: clamp(48px, 1.636rem + 5.45vw, 96px);
-    line-height: 90%;
+    
     margin-bottom: 26px;
     margin-top: 41px;
     color: white;

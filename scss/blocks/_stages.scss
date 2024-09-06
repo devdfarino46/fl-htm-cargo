@@ -3,6 +3,7 @@
   background-color: #182D42;
   background: url(../img/bg/stages.webp) no-repeat center;
   background-size: cover;
+  display: flex;
 
 	&__container {
     display: flex;
@@ -24,7 +25,6 @@
     flex: 1 0 auto;
     gap: 7px;
     text-align: left;
-    max-height: 510px;
     margin-top: auto;
     margin-bottom: auto;
 

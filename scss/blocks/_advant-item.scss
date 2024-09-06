@@ -14,7 +14,7 @@
     background:url(../img/icons/check.webp) no-repeat center, #1F5A95;
     background-size: contain;
     aspect-ratio: 1 / 1;
-    width: clamp(15px, -0.767rem + 6.82vw, 75px);
+    width: clamp(30px, 0.597rem + 5.11vw, 75px);
     border: clamp(2px, -0.244rem + 1.48vw, 15px) solid #1F5A95;
   }
 
@@ -67,10 +67,21 @@
     padding: 15px !important;
   }
 
+  p, span, b {
+    position: relative;
+    z-index: 20;
+
+    text-shadow:
+      -1px -1px 0 white,
+      1px -1px 0 white,
+      -1px 1px 0 white,
+      1px 1px 0 white;
+  }
+
   &__title {
     font-weight: 600;
     font-size: clamp(16px, 0.773rem + 0.91vw, 24px);
-    line-height: 90%;
+    
     color: #1F5A95;
     margin-bottom: 7px;
   }
