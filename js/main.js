@@ -1,11 +1,15 @@
 const pageSlider = document.querySelector('.page-slider');
 const pagination = document.querySelector('.pagination');
+const wrapper = document.querySelector('.wrapper');
+
+wrapper.style.minHeight = window.innerHeight + 'px';
+wrapper.style.height = window.innerHeight + 'px';
 
 
 if (pageSlider) {
-  const slides = pageSlider.querySelectorAll('.page-slide');
+  const swiper = pageSlider.querySelector('.swiper');
 
-  const slider = new Swiper(pageSlider.querySelector('.swiper'), {
+  const slider = new Swiper(swiper, {
     direction: 'vertical',
     slidesPerView: 1,
     pagination: {
@@ -33,12 +37,16 @@ if (pageSlider) {
           activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight
         ) {
           slider.allowTouchMove = true;
+        } else {
+          slider.allowTouchMove = false;
         }
       });
 
       pagination.addEventListener('click', ev => {
         prevSlide.scrollTo(0, 0);
       });
+    } else {
+      slider.allowTouchMove = true;
     }
   });
 }
