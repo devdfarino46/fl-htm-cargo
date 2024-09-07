@@ -5,7 +5,6 @@ const wrapper = document.querySelector('.wrapper');
 wrapper.style.minHeight = window.innerHeight + 'px';
 wrapper.style.height = window.innerHeight + 'px';
 
-
 if (pageSlider) {
   const swiper = pageSlider.querySelector('.swiper');
 
@@ -27,6 +26,14 @@ if (pageSlider) {
      * @type {HTMLElement}
      */
     const prevSlide = slider.slides[slider.previousIndex];
+
+    pagination.querySelectorAll('.swiper-pagination-bullet').forEach((bullet) => {
+      if (activeSlide.classList.contains('_bg-white')) {
+        bullet.style.borderColor = '#000';
+      } else {
+        bullet.style.borderColor = '#fff';
+      }
+    })
 
     if (activeSlide.scrollHeight > window.innerHeight) {
       slider.allowTouchMove = false;
