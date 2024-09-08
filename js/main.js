@@ -21,10 +21,13 @@ if (pageSlider) {
     },
     mousewheel: {
       releaseOnEdges: true
-    }
+    },
   });
 
   slider.on('slideChangeTransitionEnd', () => {
+    /**
+     * @type {HTMLElement}
+     */
     const activeSlide = slider.slides[slider.activeIndex];
     const prevSlide = slider.slides[slider.previousIndex];
 
@@ -39,6 +42,7 @@ if (pageSlider) {
       }
     })
 
+    // Disable mousewheel and touchmove on active slide
     if (activeSlide.scrollHeight > activeSlide.clientHeight) {
       slider.allowTouchMove = false;
       slider.mousewheel.disable();
