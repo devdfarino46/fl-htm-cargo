@@ -18,6 +18,9 @@ if (pageSlider) {
     pagination: {
       el: pagination,
       clickable: true
+    },
+    mousewheel: {
+      releaseOnEdges: true
     }
   });
 
@@ -38,20 +41,25 @@ if (pageSlider) {
 
     if (activeSlide.scrollHeight > activeSlide.clientHeight) {
       slider.allowTouchMove = false;
+      slider.mousewheel.disable();
       activeSlide.addEventListener('scroll', ev => {;
         if (activeSlide.scrollTop === 0) {
           slider.allowTouchMove = true;
+          slider.mousewheel.enable();
           console.log(1, activeSlide.scrollHeight, activeSlide.clientHeight);
         } else if (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) {
           slider.allowTouchMove = true;
+          slider.mousewheel.enable();
           console.log(2, activeSlide.scrollHeight, activeSlide.clientHeight);
         } else {
           slider.allowTouchMove = false;
+          slider.mousewheel.disable();
           console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
         }
       })
     } else {
       slider.allowTouchMove = true;
+      slider.mousewheel.enable();
       console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
     }
 
