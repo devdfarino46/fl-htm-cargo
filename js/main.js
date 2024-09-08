@@ -5,6 +5,10 @@ const wrapper = document.querySelector('.wrapper');
 wrapper.style.minHeight = window.innerHeight + 'px';
 wrapper.style.height = window.innerHeight + 'px';
 
+window.onload = function () {
+  document.body.classList.add('loaded');
+}
+
 if (pageSlider) {
   const swiper = pageSlider.querySelector('.swiper');
 
@@ -17,43 +21,42 @@ if (pageSlider) {
     }
   });
 
-  slider.on('slideChange', () => {
-    /**
-     * @type {HTMLElement}
-     */
+  slider.on('slideChangeTransitionEnd', () => {
     const activeSlide = slider.slides[slider.activeIndex];
-    /**
-     * @type {HTMLElement}
-     */
     const prevSlide = slider.slides[slider.previousIndex];
 
+    // Dynamic pagination bullet color
     pagination.querySelectorAll('.swiper-pagination-bullet').forEach((bullet) => {
       if (activeSlide.classList.contains('_bg-white')) {
         bullet.style.borderColor = '#000';
+      } else if (activeSlide.classList.contains('_bg-grey')) {
+        bullet.style.borderColor = '#ccc';
       } else {
         bullet.style.borderColor = '#fff';
       }
     })
 
-    if (activeSlide.scrollHeight > window.innerHeight) {
+    if (activeSlide.scrollHeight > activeSlide.clientHeight) {
       slider.allowTouchMove = false;
-
-      activeSlide.addEventListener('scroll', () => {
-        if (
-          activeSlide.scrollTop === 0 ||
-          activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight
-        ) {
+      activeSlide.addEventListener('scroll', ev => {;
+        if (activeSlide.scrollTop === 0) {
           slider.allowTouchMove = true;
+          console.log(1, activeSlide.scrollHeight, activeSlide.clientHeight);
+        } else if (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) {
+          slider.allowTouchMove = true;
+          console.log(2, activeSlide.scrollHeight, activeSlide.clientHeight);
         } else {
           slider.allowTouchMove = false;
+          console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
         }
-      });
-
-      pagination.addEventListener('click', ev => {
-        prevSlide.scrollTo(0, 0);
-      });
+      })
     } else {
       slider.allowTouchMove = true;
+      console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
     }
+
+    pagination.addEventListener('click', ev => {
+      prevSlide.scrollTo(0, 0);
+    });
   });
 }

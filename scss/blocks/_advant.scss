@@ -25,6 +25,8 @@
     gap: clamp(7px, 0.068rem + 1.48vw, 20px);
     margin-top: auto;
     margin-bottom: auto;
+
+    transform: translateX(100%);
 	}
 
 	&__list-image {

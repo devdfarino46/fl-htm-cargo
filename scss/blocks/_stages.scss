@@ -28,6 +28,8 @@
     margin-top: auto;
     margin-bottom: auto;
 
+    transform: translateX(100%);
+
     .stage:nth-child(1) {
       grid-column: 1 / 3;
     }

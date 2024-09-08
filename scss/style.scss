@@ -12,6 +12,17 @@ body, html {
   color: #4F4F4F;
 }
 
+body {
+  transition: .4s ease;
+  opacity: 0;
+
+  &.loaded {
+    opacity: 1;
+  }
+}
+
+
+
 [class *= "__container"], .container {
   padding: 0 clamp(15px, 0.369rem + 2.27vw, 35px);
   margin: 0 auto;
