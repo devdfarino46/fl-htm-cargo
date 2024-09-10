@@ -42,37 +42,37 @@
       grid-column: 2 / 4;
     }
 
+    // @media (max-width: 1090px) {
+    //   .stage:nth-child(1) {
+    //     grid-column: 1 / 4;
+    //   }
+
+    //   .stage:nth-child(2) {
+    //     grid-column: 4 / 6;
+    //   }
+
+    //   .stage:nth-child(3) {
+    //     grid-column: 1 / 5;
+    //   }
+
+    //   .stage:nth-child(4) {
+    //     grid-column: 5;
+    //   }
+
+    //   .stage:nth-child(5) {
+    //     grid-column: 1 / 2;
+    //   }
+
+    //   .stage:nth-child(6) {
+    //     grid-column: 2 / 4;
+    //   }
+
+    //   .stage:nth-child(7) {
+    //     grid-column: 4 / 6;
+    //   }
+    // }
+
     @media (max-width: 1090px) {
-      .stage:nth-child(1) {
-        grid-column: 1 / 4;
-      }
-
-      .stage:nth-child(2) {
-        grid-column: 4 / 6;
-      }
-
-      .stage:nth-child(3) {
-        grid-column: 1 / 5;
-      }
-
-      .stage:nth-child(4) {
-        grid-column: 5;
-      }
-
-      .stage:nth-child(5) {
-        grid-column: 1 / 2;
-      }
-
-      .stage:nth-child(6) {
-        grid-column: 2 / 4;
-      }
-
-      .stage:nth-child(7) {
-        grid-column: 4 / 6;
-      }
-    }
-
-    @media (max-width: 660px) {
       display: flex;
       flex-direction: column;
     }

@@ -19,17 +19,19 @@ if (pageSlider) {
       el: pagination,
       clickable: true
     },
-    mousewheel: {
-      releaseOnEdges: true
-    },
+    allowTouchMove: false,
+    speed: 600
   });
 
   slider.on('slideChangeTransitionEnd', () => {
-    /**
-     * @type {HTMLElement}
-     */
+    /**  @type {HTMLElement} */
     const activeSlide = slider.slides[slider.activeIndex];
+    /**  @type {HTMLElement} */
     const prevSlide = slider.slides[slider.previousIndex];
+
+    pagination.addEventListener('click', ev => {
+      prevSlide.scrollTop = 0;
+    });
 
     // Dynamic pagination bullet color
     pagination.querySelectorAll('.swiper-pagination-bullet').forEach((bullet) => {
@@ -43,32 +45,66 @@ if (pageSlider) {
     })
 
     // Disable mousewheel and touchmove on active slide
-    if (activeSlide.scrollHeight > activeSlide.clientHeight) {
-      slider.allowTouchMove = false;
-      slider.mousewheel.disable();
-      activeSlide.addEventListener('scroll', ev => {;
-        if (activeSlide.scrollTop === 0) {
-          slider.allowTouchMove = true;
-          slider.mousewheel.enable();
-          console.log(1, activeSlide.scrollHeight, activeSlide.clientHeight);
-        } else if (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) {
-          slider.allowTouchMove = true;
-          slider.mousewheel.enable();
-          console.log(2, activeSlide.scrollHeight, activeSlide.clientHeight);
-        } else {
-          slider.allowTouchMove = false;
-          slider.mousewheel.disable();
-          console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
-        }
-      })
-    } else {
-      slider.allowTouchMove = true;
-      slider.mousewheel.enable();
-      console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
-    }
+    // if (activeSlide.scrollHeight > activeSlide.clientHeight) {
+    //   slider.allowTouchMove = false;
+    //   slider.mousewheel.disable();
+    //   activeSlide.addEventListener('scroll', ev => {;
+    //     if (activeSlide.scrollTop === 0) {
+    //       slider.allowTouchMove = true;
+    //       slider.mousewheel.enable();
+    //       console.log(1, activeSlide.scrollHeight, activeSlide.clientHeight);
+    //     } else if (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) {
+    //       slider.allowTouchMove = true;
+    //       slider.mousewheel.enable();
+    //       console.log(2, activeSlide.scrollHeight, activeSlide.clientHeight);
+    //     } else {
+    //       slider.allowTouchMove = false;
+    //       slider.mousewheel.disable();
+    //       console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
+    //     }
+    //   })
+    // } else {
+    //   slider.allowTouchMove = true;
+    //   slider.mousewheel.enable();
+    //   console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
+    // }
+  });
 
-    pagination.addEventListener('click', ev => {
-      prevSlide.scrollTo(0, 0);
-    });
+  let prevTouchY = 0;
+  let prevScroll = 0;
+  let stopTouchMove = true;
+  pageSlider.addEventListener('touchstart', function (e) {
+    prevTouchY = e.touches[0].clientY;
+    prevScroll = slider.slides[slider.activeIndex].scrollTop;
+    stopTouchMove = false;
+  })
+  pageSlider.addEventListener('touchmove', function (e) {
+    const activeSlide = slider.slides[slider.activeIndex];
+
+    let currentTouchY = e.touches[0].clientY;
+    let currentScroll = activeSlide.scrollTop;
+
+    let scrollDiff = currentScroll - prevScroll;
+    let touchDiff = currentTouchY - prevTouchY;
+
+    console.log(touchDiff, scrollDiff);
+
+    if (touchDiff < 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) && !stopTouchMove) {
+      slider.slideNext();
+      stopTouchMove = true;
+    } else if (touchDiff > 0 && activeSlide.scrollTop === 0 && !stopTouchMove) {
+      slider.slidePrev();
+      stopTouchMove = true;
+    }
+  });
+
+  pageSlider.addEventListener('wheel', function (e) {
+    const activeSlide = slider.slides[slider.activeIndex];
+
+    if (e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)) {
+      slider.slideNext();
+    } else if (e.deltaY < 0 && activeSlide.scrollTop === 0) {
+      slider.slidePrev();
+    }
   });
 }
