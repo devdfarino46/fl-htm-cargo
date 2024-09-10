@@ -24,15 +24,11 @@ if (pageSlider) {
     speed: 600
   });
 
-  let mousewheelToSlide = true;
-
   slider.on('slideChangeTransitionEnd', () => {
     /**  @type {HTMLElement} */
     const activeSlide = slider.slides[slider.activeIndex];
     /**  @type {HTMLElement} */
     const prevSlide = slider.slides[slider.previousIndex];
-
-    mousewheelToSlide = true;
 
     pagination.addEventListener('click', ev => {
       prevSlide.scrollTop = 0;
@@ -89,15 +85,25 @@ if (pageSlider) {
     }
   });
 
+  let mousewheelToSlide = true;
+  
+  slider.on('transitionStart', () => {
+    mousewheelToSlide = false;
+  });
+
+  slider.on('transitionEnd', () => {
+    mousewheelToSlide = true;
+  })
+
   pageSlider.addEventListener('wheel', function (e) {
     const activeSlide = slider.slides[slider.activeIndex];
 
     if (mousewheelToSlide && e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)) {
-      mousewheelToSlide = false;
       slider.slideNext();
-    } else if (mousewheelToSlide && e.deltaY < 0 && activeSlide.scrollTop === 0) {
       mousewheelToSlide = false;
+    } else if (mousewheelToSlide && e.deltaY < 0 && activeSlide.scrollTop === 0) {
       slider.slidePrev();
+      mousewheelToSlide = false;
     }
   });
 }
