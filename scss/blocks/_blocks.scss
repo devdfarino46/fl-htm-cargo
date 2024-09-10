@@ -1,5 +1,6 @@
 .page-slider {
   overflow: hidden;
+  
   .swiper {
     display: flex;
     flex-direction: column;
@@ -15,10 +16,16 @@
 }
 
 .page-slide {
-  position: relative;
-  display: flex;
-  flex-direction: column;
   overflow-y: auto;
+
+  &__wrapper {
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    height: max-content;
+  }
 
   [class *= "__container"] {
     flex: 1;

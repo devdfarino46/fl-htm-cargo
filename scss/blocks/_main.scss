@@ -3,12 +3,17 @@
   background-color: #7C6A6C;
   background:url(../img/bg/main.webp) left top no-repeat;
   color: #FFFFFF;
-  padding: 36px 0;
+
+  .page-slide__wrapper {
+    position: relative;
+    padding: 36px 0;
+  }
 
   &__bg {
     pointer-events: none;
     position: absolute;
     inset: 0;
+    height: 100%;
 
     span {
       position: absolute;

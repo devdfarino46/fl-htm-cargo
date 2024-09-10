@@ -1,9 +1,12 @@
 .stages {
-  padding: 53px 0;
   background-color: #182D42;
   background: url(../img/bg/stages.webp) no-repeat center;
   background-size: cover;
-  display: flex;
+
+  .page-slide__wrapper {
+    display: flex;
+    padding: 53px 0;
+  }
 
 	&__container {
     display: flex;

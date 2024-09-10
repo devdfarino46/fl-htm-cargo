@@ -1,6 +1,9 @@
 .advant {
-  padding: 49px 0 26px;
   background: #13385D;
+
+  .page-slide__wrapper {
+    padding: 49px 0 26px;
+  }
 
 	&__container {
     display: flex;

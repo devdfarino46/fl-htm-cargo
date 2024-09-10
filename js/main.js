@@ -3,8 +3,8 @@ const pagination = document.querySelector('.pagination');
 const wrapper = document.querySelector('.wrapper');
 const toMainBtn = document.querySelector('.to-main-btn');
 
-wrapper.style.minHeight = window.innerHeight + 'px';
-wrapper.style.height = window.innerHeight + 'px';
+wrapper.style.height = `${window.innerHeight}px`;
+wrapper.style.minHeight = `${window.innerHeight}px`;
 
 window.onload = function () {
   document.body.classList.add('loaded');
@@ -60,31 +60,6 @@ if (pageSlider) {
   let prevTouchY = 0;
   let prevScroll = 0;
   let stopTouchMove = true;
-  pageSlider.addEventListener('touchstart', function (e) {
-    prevTouchY = e.touches[0].clientY;
-    prevScroll = slider.slides[slider.activeIndex].scrollTop;
-    stopTouchMove = false;
-  })
-  pageSlider.addEventListener('touchmove', function (e) {
-    const activeSlide = slider.slides[slider.activeIndex];
-
-    let currentTouchY = e.touches[0].clientY;
-    let currentScroll = activeSlide.scrollTop;
-
-    let scrollDiff = currentScroll - prevScroll;
-    let touchDiff = currentTouchY - prevTouchY;
-
-    console.log(touchDiff, scrollDiff);
-
-    if (touchDiff < 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) && !stopTouchMove) {
-      slider.slideNext();
-      stopTouchMove = true;
-    } else if (touchDiff > 0 && activeSlide.scrollTop === 0 && !stopTouchMove) {
-      slider.slidePrev();
-      stopTouchMove = true;
-    }
-  });
-
   let mousewheelToSlide = true;
   
   slider.on('transitionStart', () => {
@@ -95,10 +70,47 @@ if (pageSlider) {
     mousewheelToSlide = true;
   })
 
+  pageSlider.addEventListener('touchstart', function (e) {
+    prevTouchY = e.touches[0].clientY;
+    prevScroll = slider.slides[slider.activeIndex].scrollTop;
+    stopTouchMove = false;
+  })
+  pageSlider.addEventListener('touchmove', function (e) {
+    
+    const activeSlide = slider.slides[slider.activeIndex];
+
+    let currentTouchY = e.touches[0].clientY;
+    let currentScroll = activeSlide.scrollTop;
+
+    let scrollDiff = currentScroll - prevScroll;
+    let touchDiff = currentTouchY - prevTouchY;
+
+    console.log(touchDiff, scrollDiff);
+    
+
+    if (
+      touchDiff < 0 &&
+       !stopTouchMove &&
+       activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight
+      ) {
+      slider.slideNext();
+      stopTouchMove = true;
+    } else if (
+      touchDiff > 0 && 
+      !stopTouchMove && 
+      activeSlide.scrollTop === 0
+    ) {
+      slider.slidePrev();
+      stopTouchMove = true;
+    }
+  });
+
   pageSlider.addEventListener('wheel', function (e) {
     const activeSlide = slider.slides[slider.activeIndex];
 
-    if (mousewheelToSlide && e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)) {
+    if (
+      mousewheelToSlide && e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)
+    ) {
       slider.slideNext();
       mousewheelToSlide = false;
     } else if (mousewheelToSlide && e.deltaY < 0 && activeSlide.scrollTop === 0) {
