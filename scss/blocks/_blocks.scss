@@ -50,6 +50,36 @@
   }
 }
 
+.to-main-btn {
+  pointer-events: none;
+  opacity: 0;
+  position: fixed;
+  z-index: 100;
+  bottom: clamp(15px, 0.568rem + 1.48vw, 28px);
+  right: clamp(20px, 0.767rem + 1.93vw, 37px);
+  display: flex;
+  background: #13385d83;
+  backdrop-filter: blur(3px);
+  transition: .3s ease;
+  color: white;
+  padding: 10px 15px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 7px;
+  border: 1px solid white;
+
+  &._visible {
+    pointer-events: all;
+    opacity: 1;
+  }
+
+  @media (any-hover: hover) {
+    &:hover {
+      background: #13385d;
+    }
+  }
+}
+
 .content-anim,
 .content-anim-before::before {
   transition: .4s ease;

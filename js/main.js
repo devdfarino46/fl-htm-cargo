@@ -1,6 +1,7 @@
 const pageSlider = document.querySelector('.page-slider');
 const pagination = document.querySelector('.pagination');
 const wrapper = document.querySelector('.wrapper');
+const toMainBtn = document.querySelector('.to-main-btn');
 
 wrapper.style.minHeight = window.innerHeight + 'px';
 wrapper.style.height = window.innerHeight + 'px';
@@ -23,14 +24,23 @@ if (pageSlider) {
     speed: 600
   });
 
+  let mousewheelToSlide = true;
+
   slider.on('slideChangeTransitionEnd', () => {
     /**  @type {HTMLElement} */
     const activeSlide = slider.slides[slider.activeIndex];
     /**  @type {HTMLElement} */
     const prevSlide = slider.slides[slider.previousIndex];
 
+    mousewheelToSlide = true;
+
     pagination.addEventListener('click', ev => {
       prevSlide.scrollTop = 0;
+    });
+
+    toMainBtn.addEventListener('click', () => {
+      activeSlide.scrollTop = 0;
+      slider.slideTo(0);
     });
 
     // Dynamic pagination bullet color
@@ -44,30 +54,11 @@ if (pageSlider) {
       }
     })
 
-    // Disable mousewheel and touchmove on active slide
-    // if (activeSlide.scrollHeight > activeSlide.clientHeight) {
-    //   slider.allowTouchMove = false;
-    //   slider.mousewheel.disable();
-    //   activeSlide.addEventListener('scroll', ev => {;
-    //     if (activeSlide.scrollTop === 0) {
-    //       slider.allowTouchMove = true;
-    //       slider.mousewheel.enable();
-    //       console.log(1, activeSlide.scrollHeight, activeSlide.clientHeight);
-    //     } else if (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight) {
-    //       slider.allowTouchMove = true;
-    //       slider.mousewheel.enable();
-    //       console.log(2, activeSlide.scrollHeight, activeSlide.clientHeight);
-    //     } else {
-    //       slider.allowTouchMove = false;
-    //       slider.mousewheel.disable();
-    //       console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
-    //     }
-    //   })
-    // } else {
-    //   slider.allowTouchMove = true;
-    //   slider.mousewheel.enable();
-    //   console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
-    // }
+    if (slider.activeIndex !== 0) {
+      toMainBtn.classList.add('_visible');
+    } else {
+      toMainBtn.classList.remove('_visible');
+    }
   });
 
   let prevTouchY = 0;
@@ -101,9 +92,11 @@ if (pageSlider) {
   pageSlider.addEventListener('wheel', function (e) {
     const activeSlide = slider.slides[slider.activeIndex];
 
-    if (e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)) {
+    if (mousewheelToSlide && e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)) {
+      mousewheelToSlide = false;
       slider.slideNext();
-    } else if (e.deltaY < 0 && activeSlide.scrollTop === 0) {
+    } else if (mousewheelToSlide && e.deltaY < 0 && activeSlide.scrollTop === 0) {
+      mousewheelToSlide = false;
       slider.slidePrev();
     }
   });
