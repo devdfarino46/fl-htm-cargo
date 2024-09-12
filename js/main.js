@@ -1,121 +1,23 @@
-const pageSlider = document.querySelector('.page-slider');
-const pagination = document.querySelector('.pagination');
-const wrapper = document.querySelector('.wrapper');
 const toMainBtn = document.querySelector('.to-main-btn');
+const sections = document.querySelectorAll('.section');
 
-wrapper.style.height = `${window.innerHeight}px`;
-wrapper.style.minHeight = `${window.innerHeight}px`;
+function setActiveSection() {
+  sections.forEach((section) => {
+    if (
+      section.getBoundingClientRect().top <= window.innerHeight - 40 && section.getBoundingClientRect().bottom >= 40
+    ) {
+      section.classList.add('active');
+    } else {
+      section.classList.remove('active');
+    }
+  });
+}
 
 window.onload = function () {
   document.body.classList.add('loaded');
+  setActiveSection();
 }
 
-if (pageSlider) {
-  const swiper = pageSlider.querySelector('.swiper');
-
-  const slider = new Swiper(swiper, {
-    direction: 'vertical',
-    slidesPerView: 1,
-    pagination: {
-      el: pagination,
-      clickable: true
-    },
-    allowTouchMove: false,
-    speed: 600
-  });
-
-  slider.on('slideChangeTransitionEnd', () => {
-    /**  @type {HTMLElement} */
-    const activeSlide = slider.slides[slider.activeIndex];
-    /**  @type {HTMLElement} */
-    const prevSlide = slider.slides[slider.previousIndex];
-
-    pagination.addEventListener('click', ev => {
-      prevSlide.scrollTop = 0;
-    });
-
-    toMainBtn.addEventListener('click', () => {
-      activeSlide.scrollTop = 0;
-      slider.slideTo(0);
-    });
-
-    // Dynamic pagination bullet color
-    pagination.querySelectorAll('.swiper-pagination-bullet').forEach((bullet) => {
-      if (activeSlide.classList.contains('_bg-white')) {
-        bullet.style.borderColor = '#000';
-      } else if (activeSlide.classList.contains('_bg-grey')) {
-        bullet.style.borderColor = '#ccc';
-      } else {
-        bullet.style.borderColor = '#fff';
-      }
-    })
-
-    if (slider.activeIndex !== 0) {
-      toMainBtn.classList.add('_visible');
-    } else {
-      toMainBtn.classList.remove('_visible');
-    }
-  });
-
-  let prevTouchY = 0;
-  let prevScroll = 0;
-  let stopTouchMove = true;
-  let mousewheelToSlide = true;
-  
-  slider.on('transitionStart', () => {
-    mousewheelToSlide = false;
-  });
-
-  slider.on('transitionEnd', () => {
-    mousewheelToSlide = true;
-  })
-
-  pageSlider.addEventListener('touchstart', function (e) {
-    prevTouchY = e.touches[0].clientY;
-    prevScroll = slider.slides[slider.activeIndex].scrollTop;
-    stopTouchMove = false;
-  })
-  pageSlider.addEventListener('touchmove', function (e) {
-    
-    const activeSlide = slider.slides[slider.activeIndex];
-
-    let currentTouchY = e.touches[0].clientY;
-    let currentScroll = activeSlide.scrollTop;
-
-    let scrollDiff = currentScroll - prevScroll;
-    let touchDiff = currentTouchY - prevTouchY;
-
-    console.log(touchDiff, scrollDiff);
-    
-
-    if (
-      touchDiff < 0 &&
-       !stopTouchMove &&
-       activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight
-      ) {
-      slider.slideNext();
-      stopTouchMove = true;
-    } else if (
-      touchDiff > 0 && 
-      !stopTouchMove && 
-      activeSlide.scrollTop === 0
-    ) {
-      slider.slidePrev();
-      stopTouchMove = true;
-    }
-  });
-
-  pageSlider.addEventListener('wheel', function (e) {
-    const activeSlide = slider.slides[slider.activeIndex];
-
-    if (
-      mousewheelToSlide && e.deltaY > 0 && (activeSlide.scrollTop + activeSlide.clientHeight >= activeSlide.scrollHeight)
-    ) {
-      slider.slideNext();
-      mousewheelToSlide = false;
-    } else if (mousewheelToSlide && e.deltaY < 0 && activeSlide.scrollTop === 0) {
-      slider.slidePrev();
-      mousewheelToSlide = false;
-    }
-  });
-}
+window.addEventListener('scroll', ev => {
+  setActiveSection();
+});

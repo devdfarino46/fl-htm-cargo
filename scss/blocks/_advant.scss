@@ -1,9 +1,6 @@
 .advant {
   background: #13385D;
-
-  .page-slide__wrapper {
-    padding: 49px 0 26px;
-  }
+  padding: 49px 0 26px;
 
 	&__container {
     display: flex;
@@ -14,9 +11,19 @@
     }
 	}
 
+  &.active &__title,
+  &.active &__list {
+    transform: scale(1) translate(0, 0);
+    opacity: 1;
+  }
+
 	&__title {
     margin-bottom: 26px;
     color: white;
+
+    transition: .4s ease;
+    opacity: 0;
+    transform: translateX(-100%);
 	}
 
 	&__list {
@@ -29,7 +36,10 @@
     margin-top: auto;
     margin-bottom: auto;
 
-    transform: translateX(100%);
+    transition: .4s ease;
+    transition-delay: .2s;
+    opacity: 0;
+    transform: scale(0.5);
 	}
 
 	&__list-image {

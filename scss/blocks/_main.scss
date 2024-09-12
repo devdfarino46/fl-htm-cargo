@@ -3,28 +3,24 @@
   background-color: #7C6A6C;
   background:url(../img/bg/main.webp) left top no-repeat;
   color: #FFFFFF;
-
-  .page-slide__wrapper {
-    position: relative;
-    padding: 36px 0;
-  }
+  padding: 36px 0;
 
   &__bg {
     pointer-events: none;
     position: absolute;
     inset: 0;
     height: 100%;
+    overflow: hidden;
 
     span {
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
-
+      
       transition: .4s ease;
-      transform-box: view-box;
-      transform-origin: left;
-      transform: scaleX(0);
+      transform: translateX(-100%);
+      opacity: 0;
 
       &:nth-child(1) {
         width: 79%;
@@ -61,7 +57,7 @@
         top: auto;
         right: 0;
 
-        transform: scaleY(0);
+        transform: translateY(100%);
 
         &:nth-child(1) {
           border-top-right-radius: 0;
@@ -106,14 +102,10 @@
       }
     }
   }
-  
-  &.swiper-slide-active &__bg span {
-    transform: scaleX(1);
 
-    @media (max-width: 670px) {
-      transform-origin: bottom;
-      transform: scaleY(1);
-    }
+  &.active &__bg span {
+    transform: translate(0, 0);
+    opacity: 1;
   }
 
 	&__container {
@@ -126,6 +118,26 @@
       text-align: center;
     }
 	}
+
+  &__tags,
+  &__title,
+  &__subtitle,
+  &__text,
+  &__list {
+    transition-duration: .3s;
+    transition-timing-function: ease;
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  &.active &__tags,
+  &.active &__title,
+  &.active &__subtitle,
+  &.active &__text,
+  &.active &__list {
+    transform: translateX(0);
+    opacity: 1;
+  }
 
 	&__tags {
     display: flex;
@@ -145,16 +157,25 @@
     margin-bottom: 26px;
     margin-top: 41px;
     color: white;
+
+    transform: translateX(100%);
+    transition-delay: .2s;
 	}
 
 	&__subtitle {
     font-weight: 600;
     font-size: clamp(24px, 1.273rem + 0.91vw, 32px);
     margin-bottom: 41px;
+
+    transform: translateX(100%);
+    transition-delay: .2s;
 	}
 
 	&__text {
     margin-bottom: 41px;
+
+    transform: translateX(100%);
+    transition-delay: .2s;
 	}
 
 	&__list {
@@ -163,6 +184,8 @@
     margin-bottom: auto;
     gap: 16px;
     text-align: left;
+
+    transition-delay: .4s;
     
     li {
       font-size: 19px;

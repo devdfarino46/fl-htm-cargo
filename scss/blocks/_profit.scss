@@ -1,8 +1,5 @@
 .profit {
-
-  .page-slide__wrapper {
-    padding: 53px 0 0;
-  }
+  padding: 53px 0 0;
 
 	&__container {
     display: flex;
@@ -13,8 +10,18 @@
     }
 	}
 
+  &.active &__title,
+  &.active &__list {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
 	&__title {
     margin-bottom: 38px;
+
+    transition: .4s ease;
+    transform: translate(-100%);
+    opacity: 0;
 	}
 
 	&__list {
@@ -25,7 +32,10 @@
     gap: 15px 8px;
     justify-content: center;
 
-    transform: translateX(100%);
+    transition: .4s ease;
+    transition-delay: .2s;
+    transform: translate(100%);
+    opacity: 0;
 
     @media (max-width: 1120px) {
       grid-template-columns: 1fr 1fr 1fr 1fr;

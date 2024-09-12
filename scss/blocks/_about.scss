@@ -1,5 +1,4 @@
 .about {
-  
 	&__top {
     position: relative;
     flex: 1 0 auto;
@@ -23,7 +22,6 @@
     }
 
     &::before {
-      transform: translateX(100%);
       content: '';
       pointer-events: none;
       position: absolute;
@@ -33,6 +31,10 @@
       bottom: 0;
       background: url(../img/bg/about.webp) center no-repeat;
       background-size: cover;
+
+      transition: .4s ease;
+      transition-delay: .6s;
+      opacity: 0;
 
       @media (max-width: 1100px) {
         height: 33%;
@@ -47,9 +49,24 @@
     }
 	}
 
+  &.active &__top::before {
+    opacity: 1;
+  }
+
+  &.active &__main,
+  &.active &__right,
+  &.active &__bottom {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
 	&__main {
     max-width: 655px;
     padding: 53px 0 40px;
+
+    transition: .4s ease;
+    transform: translateX(-100%);
+    opacity: 0;
 	}
 
 	&__title {
@@ -126,12 +143,17 @@
     text-align: left;
     gap: 42px;
 
-    transform: translateX(100%);
+    transition: .4s ease;
+    transition-delay: .2s;
+    transform: translateY(-100%);
+    opacity: 0;
 
     @media (max-width: 1100px) {
       border-radius: 20px 20px 0 0;
       align-self: flex-end;
       max-width: 500px;
+
+      transform: translateY(100%);
     }
 
     li {
@@ -154,6 +176,11 @@
     background: #13385D;
     color: white;
     padding: 18px 0 40px;
+
+    transition: .4s ease;
+    transition-delay: .4s;
+    transform: translateY(100%);
+    opacity: 0;
 
     @media (max-width: 580px) {
       text-align: center;
