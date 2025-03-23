@@ -1,18 +1,16 @@
-const pageSlider = document.querySelector('.page-slider');
-const pagination = document.querySelector('.pagination');
-const wrapper = document.querySelector('.wrapper');
+"use strict";
 
+var pageSlider = document.querySelector('.page-slider');
+var pagination = document.querySelector('.pagination');
+var wrapper = document.querySelector('.wrapper');
 wrapper.style.minHeight = window.innerHeight + 'px';
 wrapper.style.height = window.innerHeight + 'px';
-
 window.onload = function () {
   document.body.classList.add('loaded');
-}
-
+};
 if (pageSlider) {
-  const swiper = pageSlider.querySelector('.swiper');
-
-  const slider = new Swiper(swiper, {
+  var swiper = pageSlider.querySelector('.swiper');
+  var slider = new Swiper(swiper, {
     direction: 'vertical',
     slidesPerView: 1,
     pagination: {
@@ -21,18 +19,17 @@ if (pageSlider) {
     },
     mousewheel: {
       releaseOnEdges: true
-    },
+    }
   });
-
-  slider.on('slideChangeTransitionEnd', () => {
+  slider.on('slideChangeTransitionEnd', function () {
     /**
      * @type {HTMLElement}
      */
-    const activeSlide = slider.slides[slider.activeIndex];
-    const prevSlide = slider.slides[slider.previousIndex];
+    var activeSlide = slider.slides[slider.activeIndex];
+    var prevSlide = slider.slides[slider.previousIndex];
 
     // Dynamic pagination bullet color
-    pagination.querySelectorAll('.swiper-pagination-bullet').forEach((bullet) => {
+    pagination.querySelectorAll('.swiper-pagination-bullet').forEach(function (bullet) {
       if (activeSlide.classList.contains('_bg-white')) {
         bullet.style.borderColor = '#000';
       } else if (activeSlide.classList.contains('_bg-grey')) {
@@ -40,13 +37,14 @@ if (pageSlider) {
       } else {
         bullet.style.borderColor = '#fff';
       }
-    })
+    });
 
     // Disable mousewheel and touchmove on active slide
     if (activeSlide.scrollHeight > activeSlide.clientHeight) {
       slider.allowTouchMove = false;
       slider.mousewheel.disable();
-      activeSlide.addEventListener('scroll', ev => {;
+      activeSlide.addEventListener('scroll', function (ev) {
+        ;
         if (activeSlide.scrollTop === 0) {
           slider.allowTouchMove = true;
           slider.mousewheel.enable();
@@ -60,15 +58,14 @@ if (pageSlider) {
           slider.mousewheel.disable();
           console.log(3, activeSlide.scrollHeight, activeSlide.clientHeight);
         }
-      })
+      });
     } else {
       slider.allowTouchMove = true;
       slider.mousewheel.enable();
-      console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
     }
-
-    pagination.addEventListener('click', ev => {
+    pagination.addEventListener('click', function (ev) {
       prevSlide.scrollTo(0, 0);
     });
   });
 }
+//# sourceMappingURL=main.js.map
