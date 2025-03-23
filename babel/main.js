@@ -64,7 +64,6 @@ if (pageSlider) {
     } else {
       slider.allowTouchMove = true;
       slider.mousewheel.enable();
-      console.log(4, activeSlide.scrollHeight, activeSlide.clientHeight);
     }
 
     pagination.addEventListener('click', ev => {
